@@ -1,6 +1,7 @@
 package org.aksw.index;
 /** @author Konrad Höffner */
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -75,7 +76,7 @@ public class IndexResultSet extends TreeSet<IndexItem>
 	{	
 		int startSize = c.size();
 		for(Object o:c) {remove(o);}
-		return(startSize==c.size());
+		return(startSize!=c.size());
 	}
 
 	@Override public void clear()
@@ -98,7 +99,8 @@ public class IndexResultSet extends TreeSet<IndexItem>
 		return removeAll(remove);
 	}
 
-	@Override public Iterator<IndexItem> iterator() {throw new UnsupportedOperationException();}
+	@Override public Iterator<IndexItem> iterator() {return Collections.unmodifiableSet(new HashSet<>(this)).iterator();}
+	
 	@Override public NavigableSet<IndexItem> subSet(IndexItem fromElement, boolean fromInclusive, IndexItem toElement,	boolean toInclusive)
 	{throw new UnsupportedOperationException();}
 	

@@ -1,11 +1,11 @@
 package org.aksw.index;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import org.aksw.index.IndexItem;
-import org.aksw.index.IndexResultSet;
 import org.junit.Test;
 
 public class IndexResultSetTest
@@ -85,15 +85,19 @@ public class IndexResultSetTest
 	{
 		IndexResultSet test = testSet();
 		assertTrue(test.contains(LEIPZIG_URI));
+		assertTrue(test.size()==2);
 		test.remove(LEIPZIG_URI);
 		assertFalse(test.contains(LEIPZIG_URI));
+		assertTrue(test.size()==1);
 	}
 
 	@Test public void testRemoveIndexItem()
 	{
 		IndexResultSet test = testSet();
 		assertTrue(test.contains(leipzig2));
+		assertTrue(test.size()==2);
 		test.remove(leipzig2);
+		assertTrue(test.size()==1);
 		assertFalse(test.contains(leipzig2));
 	}
 
@@ -110,7 +114,7 @@ public class IndexResultSetTest
 
 	@Test public void testRemoveAllCollection()
 	{
-		IndexResultSet test = new IndexResultSet();
+		IndexResultSet test = testSet();
 		test.removeAll(cities);
 		assertTrue(test.isEmpty());
 		assertFalse(test.contains(leipzig2));
@@ -118,13 +122,25 @@ public class IndexResultSetTest
 
 	@Test public void testAddAll()
 	{
-		IndexResultSet test = new IndexResultSet();
+		IndexResultSet test = testSet();
 		test.addAll(cities);
 		assertTrue(test.contains(leipzig2));
 		assertTrue(test.contains(berlin));
 		assertTrue(test.contains(dresden2));
 	}
 
+	@Test public void testRetainAll()
+	{
+		IndexResultSet leipzigDresden = new IndexResultSet();
+		IndexResultSet leipzigBerlin = new IndexResultSet();
+		leipzigBerlin.add(leipzig2);
+		leipzigBerlin.add(berlin);
+		leipzigDresden.retainAll(leipzigBerlin);
+		assertFalse(leipzigBerlin.contains(leipzig2));
+		assertFalse(leipzigBerlin.contains(berlin));
+		assertTrue(leipzigBerlin.contains(dresden2));
+	}
+	
 //	@Test public void testIterator()
 //	{
 //		IndexResultSet test = testSet();
