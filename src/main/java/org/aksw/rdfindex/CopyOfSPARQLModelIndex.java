@@ -1,3 +1,4 @@
+package org.aksw.rdfindex;
 //package org.dllearner.common.index;
 //
 //import java.util.ArrayList;

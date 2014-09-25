@@ -1,4 +1,4 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

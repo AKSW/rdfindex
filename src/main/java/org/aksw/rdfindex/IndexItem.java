@@ -1,4 +1,4 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ public class IndexItem implements Comparable<IndexItem>
 {	
 	private String uri;
 	private String label;
-	private float score;
+	protected float score;
 	
 	@Override public int compareTo(IndexItem item)
 	{

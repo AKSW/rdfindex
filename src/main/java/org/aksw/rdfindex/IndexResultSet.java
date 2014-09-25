@@ -1,7 +1,6 @@
-package org.aksw.index;
-/** @author Konrad Höffner */
+package org.aksw.rdfindex;
+
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -16,6 +15,10 @@ import lombok.NoArgsConstructor;
 import lombok.Synchronized;
 import lombok.ToString;
 
+/** Set of IndexItems along with an index by URI.
+ * Only one element for each uri can exist.
+ * If another one with the same URI is added, the one with the highest score is kept.  
+ * @author Konrad Höffner */
 @AllArgsConstructor
 @NoArgsConstructor
 //@Getter
@@ -71,7 +74,7 @@ public class IndexResultSet extends TreeSet<IndexItem>
 		if(o instanceof IndexItem) {return remove((IndexItem)o);}
 		return false;
 	}
-	
+
 	@Override public boolean removeAll(Collection<?> c)
 	{	
 		int startSize = c.size();
@@ -84,7 +87,7 @@ public class IndexResultSet extends TreeSet<IndexItem>
 		uriToItem.clear();
 		super.clear();
 	}
-	
+
 	@Override public boolean addAll(Collection<? extends IndexItem> c)
 	{
 		boolean modified=false;
@@ -99,16 +102,29 @@ public class IndexResultSet extends TreeSet<IndexItem>
 		return removeAll(remove);
 	}
 
-	@Override public Iterator<IndexItem> iterator() {return Collections.unmodifiableSet(new HashSet<>(this)).iterator();}
-	
+	@Override public Iterator<IndexItem> iterator()
+	{
+		  final Iterator<IndexItem> delegate = super.iterator();
+		    return new Iterator<IndexItem>() {
+		        @Override public boolean hasNext() {return delegate.hasNext();}
+		        @Override public IndexItem next() {return delegate.next();}
+		        @Override public void remove() {throw new UnsupportedOperationException("Read Only Iterator");}
+		    };
+	}
+
 	@Override public NavigableSet<IndexItem> subSet(IndexItem fromElement, boolean fromInclusive, IndexItem toElement,	boolean toInclusive)
 	{throw new UnsupportedOperationException();}
-	
+
 	@Override public SortedSet<IndexItem> subSet(IndexItem fromElement, IndexItem toElement)
 	{throw new UnsupportedOperationException();}
 
 	public void retainBest(int n)
 	{
 		retainAll(new LinkedList<>(this).subList(0, n));		
+	}
+	
+	public void multiplyScore(float factor)
+	{
+		for(IndexItem item : this) {item.score=Math.max(0, Math.min(1,item.score*factor));}
 	}
 }

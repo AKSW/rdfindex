@@ -1,4 +1,4 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
 import org.aksw.jena_sparql_api.core.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;

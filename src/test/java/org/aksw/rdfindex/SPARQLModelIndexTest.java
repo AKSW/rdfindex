@@ -1,4 +1,4 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
 import static org.junit.Assert.assertTrue;
 import net.sf.extjwnl.JWNLException;
@@ -7,8 +7,8 @@ import net.sf.extjwnl.data.POS;
 import net.sf.extjwnl.data.Synset;
 import net.sf.extjwnl.data.Word;
 import net.sf.extjwnl.dictionary.Dictionary;
-import org.aksw.index.SPARQLModelIndex;
-import org.aksw.index.WordNetIndex;
+import org.aksw.rdfindex.SPARQLModelIndex;
+import org.aksw.rdfindex.WordNetIndex;
 import org.junit.Test;
 
 public class SPARQLModelIndexTest

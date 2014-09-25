@@ -1,4 +1,4 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
 import java.util.LinkedList;
 import java.util.List;

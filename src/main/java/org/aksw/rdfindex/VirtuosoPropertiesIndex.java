@@ -1,4 +1,4 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 //package org.dllearner.common.index;
 //
 //import org.dllearner.kb.sparql.ExtractionDBCache;

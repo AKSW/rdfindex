@@ -1,11 +1,14 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import org.aksw.rdfindex.IndexItem;
+import org.aksw.rdfindex.IndexResultSet;
 import org.junit.Test;
 
 public class IndexResultSetTest
@@ -131,22 +134,22 @@ public class IndexResultSetTest
 
 	@Test public void testRetainAll()
 	{
-		IndexResultSet leipzigDresden = new IndexResultSet();
+		IndexResultSet leipzigDresden = testSet();
 		IndexResultSet leipzigBerlin = new IndexResultSet();
 		leipzigBerlin.add(leipzig2);
 		leipzigBerlin.add(berlin);
 		leipzigDresden.retainAll(leipzigBerlin);
-		assertFalse(leipzigBerlin.contains(leipzig2));
-		assertFalse(leipzigBerlin.contains(berlin));
-		assertTrue(leipzigBerlin.contains(dresden2));
+		assertTrue(leipzigDresden.contains(leipzig2));
+		assertFalse(leipzigDresden.contains(berlin));
+		assertFalse(leipzigDresden.contains(dresden2));
 	}
 	
-//	@Test public void testIterator()
-//	{
-//		IndexResultSet test = testSet();
-//		Iterator<IndexItem> it = test.iterator();
-//		assertTrue(it.hasNext());
-//	}
+	@Test public void testIterator()
+	{
+		IndexResultSet test = testSet();
+		Iterator<IndexItem> it = test.iterator();
+		assertTrue(it.hasNext());
+	}
 	
 //	@Test public void testHashCode()
 //	{

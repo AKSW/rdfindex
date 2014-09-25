@@ -1,9 +1,7 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
 import java.util.Arrays;
 import java.util.Collection;
-import org.aksw.kb.sparql.SparqlEndpoint;
-import com.hp.hpl.jena.rdf.model.Model;
 
 public class Indices
 {

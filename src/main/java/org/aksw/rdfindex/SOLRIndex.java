@@ -1,9 +1,6 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -12,7 +9,6 @@ import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-import org.apache.solr.common.params.ModifiableSolrParams;
 
 public class SOLRIndex extends Index
 {
@@ -20,7 +16,7 @@ public class SOLRIndex extends Index
 private HttpSolrServer server;
 	
 	private String primarySearchField;
-	private String secondarySearchField;
+//	private String secondarySearchField;
 	
 	private String sortField;
 	
@@ -37,22 +33,22 @@ private HttpSolrServer server;
 		this.primarySearchField = primarySearchField;
 	}
 	
-	public void setSearchFields(String primarySearchField, String secondarySearchField){
-		this.primarySearchField = primarySearchField;
-		this.secondarySearchField = secondarySearchField;
-	}
+//	public void setSearchFields(String primarySearchField, String secondarySearchField){
+//		this.primarySearchField = primarySearchField;
+////		this.secondarySearchField = secondarySearchField;
+//	}
 	
 	public void setPrimarySearchField(String primarySearchField) {
 		this.primarySearchField = primarySearchField;
 	}
 	
-	public void setSecondarySearchField(String secondarySearchField) {
-		this.secondarySearchField = secondarySearchField;
-	}
+//	public void setSecondarySearchField(String secondarySearchField) {
+//		this.secondarySearchField = secondarySearchField;
+//	}
 
 	@Override
 	public IndexResultSet getResourcesWithScores(String queryString, int limit) {
-		IndexResultSet rs = new TreeSet<>();
+		IndexResultSet rs = new IndexResultSet();
 		
 		QueryResponse response;
 		try {
@@ -79,11 +75,9 @@ private HttpSolrServer server;
 			}			
 			SolrQuery query = new SolrQuery(solrString);
 		    query.setRows(limit);
-		    query.setStart(offset);
+//		    query.setStart(offset);
 		    query.addField("uri");
-		    if(sortField != null){
-		    	query.addSortField(sortField, ORDER.desc);
-		    }
+		    if(sortField != null) {	query.addSortField(sortField, ORDER.desc);}
 		    query.addField("score");
 			response = server.query(query);
 			SolrDocumentList docList = response.getResults();
@@ -91,7 +85,7 @@ private HttpSolrServer server;
 			for(SolrDocument d : docList){
 				float score = 0;
 				if(d.get("score") instanceof ArrayList){
-					score = ((Float)((ArrayList)d.get("score")).get(1));
+					score = ((Float)((ArrayList<?>)d.get("score")).get(1));
 				} else {
 					score = (Float) d.get("score");
 				}

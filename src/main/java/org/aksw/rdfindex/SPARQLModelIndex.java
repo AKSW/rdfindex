@@ -1,11 +1,6 @@
-package org.aksw.index;
+package org.aksw.rdfindex;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import org.apache.jena.query.text.EntityDefinition;
 import org.apache.jena.query.text.TextDatasetFactory;
 import org.apache.lucene.store.Directory;
@@ -106,7 +101,7 @@ public class SPARQLModelIndex extends Index
 
 				String uri = uriNode.asResource().getURI();
 				String label = labelNode.asLiteral().getLexicalForm();
-				items.put(uri,new IndexItem(uri, label, scoreAssignement));
+				items.add(new IndexItem(uri, label, scoreAssignement));
 			}
 		}
 		return items;
@@ -201,11 +196,11 @@ public class SPARQLModelIndex extends Index
 		languagesFilter += ")";
 
 		//SPARQL 1.1 VALUES based
-		String languageValues = "VALUES ?lang {";
-		for (String lang : languages) {
-			languageValues += "\"" + lang + "\" ";
-		}
-		languageValues += "}";
+//		String languageValues = "VALUES ?lang {";
+//		for (String lang : languages) {
+//			languageValues += "\"" + lang + "\" ";
+//		}
+//		languageValues += "}";
 		//		languagesFilter = languageValues + " FILTER(LANGMATCHES(LANG(?l), ?lang))";
 
 		String query = "CONSTRUCT {?s a ?type .?s ?p_label ?l .}"
