@@ -6,9 +6,9 @@ import org.junit.Test;
 public class SOLRIndexTest
 {
 
-	@Test public void testGetResources()
-	{
-		fail("Not yet implemented");
-	}
+//	@Test public void testGetResources()
+//	{
+//		fail("Not yet implemented");
+//	}
 
 }
