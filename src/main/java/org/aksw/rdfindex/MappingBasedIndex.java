@@ -32,11 +32,11 @@ public class MappingBasedIndex {
 				List<String> tokens = new ArrayList<String>();
 				String tokenString = line.substring(split + 1);
 				String[] tokenArray = tokenString.split(",");
-				for(String token : tokenArray){tokens.add(token.trim());}				
-				uriToTokens.put(uri, tokens);				
+				for(String token : tokenArray){tokens.add(token.trim());}
+				uriToTokens.put(uri, tokens);
 			}
 			return uriToTokens;
-		}		
+		}
 	}
 
 	public MappingBasedIndex(InputStream classMappingsFile, InputStream resourceMappingsFile,
@@ -135,18 +135,13 @@ public class MappingBasedIndex {
 		return rs;
 	}
 
-	public Boolean isDataProperty(String uri){
-		if(datatypePropertyUri2TokensMap.containsKey(uri)) {
-			return true;
-		} else if(objectPropertyUri2TokensMap.containsKey(uri)){
-			return false;
-		}
-		return null;
+	public boolean isDataProperty(String uri){
+		return (datatypePropertyUri2TokensMap.containsKey(uri));
 	}
 
-	public static void main(String[] args) throws IOException {
-		MappingBasedIndex index = new MappingBasedIndex(MappingBasedIndex.class.getClassLoader().getResourceAsStream("tbsl/oxford_class_mappings.txt"),null, null, null);
-		System.out.println(index.getClasses("flat"));
-	}
+//	public static void main(String[] args) throws IOException {
+//		MappingBasedIndex index = new MappingBasedIndex(MappingBasedIndex.class.getClassLoader().getResourceAsStream("tbsl/oxford_class_mappings.txt"),null, null, null);
+//		System.out.println(index.getClasses("flat"));
+//	}
 
 }

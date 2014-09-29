@@ -6,18 +6,19 @@ public class SPARQLPropertiesIndex extends SPARQLIndex
 {
 	public SPARQLPropertiesIndex(QueryExecutionFactory qef) {super(qef);}
 	
-	{
-		queryTemplate = "SELECT DISTINCT ?uri WHERE {\n" +
+	private static final String QUERY_TEMPLATE = "SELECT DISTINCT ?uri WHERE {\n" +
 				"?s ?uri ?o.\n" + 
 				"?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +
 				"FILTER(REGEX(STR(?label), '%s', 'i'))}\n" +
-				"LIMIT %d OFFSET %d";
+				"LIMIT %d";
 
-		queryWithLabelTemplate = "PREFIX owl:<http://www.w3.org/2002/07/owl#>  SELECT DISTINCT ?uri ?label WHERE {\n" +
+	private static final String QUERY_TEMPLATE_WITH_LABEL = "PREFIX owl:<http://www.w3.org/2002/07/owl#>  SELECT DISTINCT ?uri ?label WHERE {\n" +
 				"?s ?uri ?o.\n" + 
 				//				"{?uri a owl:DatatypeProperty.} UNION {?uri a owl:ObjectProperty.} " + 
 				"?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +
 				"FILTER(REGEX(STR(?label), '%s', 'i'))}\n" +
-				"LIMIT %d OFFSET %d";
-	}
+				"LIMIT %d";
+
+		@Override protected String getQueryTemplate() {return QUERY_TEMPLATE;}
+		@Override protected String getQueryTemplateWithLabel() {return QUERY_TEMPLATE_WITH_LABEL;}
 }

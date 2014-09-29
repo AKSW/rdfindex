@@ -120,7 +120,7 @@ public class IndexResultSet extends TreeSet<IndexItem>
 
 	public void retainBest(int n)
 	{
-		retainAll(new LinkedList<>(this).subList(0, n));		
+		retainAll(new LinkedList<>(this).subList(0, Math.min(n, this.size())));		
 	}
 	
 	public void multiplyScore(float factor)

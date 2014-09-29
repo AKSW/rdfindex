@@ -9,17 +9,20 @@ public class SPARQLIndex extends Index
 {
 	private final QueryExecutionFactory qef;
 
-	protected String queryTemplate = "SELECT DISTINCT ?uri WHERE {\n" +
+	static final String QUERY_TEMPLATE = "SELECT DISTINCT ?uri WHERE {\n" +
 			"?uri a ?type.\n" + 
 			"?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +
 			"FILTER(REGEX(STR(?label), '%s'))}\n" +
-			"LIMIT %d OFFSET %d";
+			"LIMIT %d";
 	
-	protected String queryWithLabelTemplate = "SELECT DISTINCT ?uri ?label WHERE {\n" +
+	static final String QUERY_TEMPLATE_WITH_LABEL = "SELECT DISTINCT ?uri ?label WHERE {\n" +
 			"?uri a ?type.\n" + 
 			"?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +
 			"FILTER(REGEX(STR(?label), '%s'))}\n" +
-			"LIMIT %d OFFSET %d";	
+			"LIMIT %d";
+	
+	protected String getQueryTemplate() {return QUERY_TEMPLATE;}
+	protected String getQueryTemplateWithLabel() {return QUERY_TEMPLATE_WITH_LABEL;}
 	
 	public SPARQLIndex(QueryExecutionFactory qef) {this.qef=qef;}
 	
@@ -27,7 +30,7 @@ public class SPARQLIndex extends Index
 	public IndexResultSet getResourcesWithScores(String searchTerm, int limit) {
 		IndexResultSet irs = new IndexResultSet();
 		
-		String query = String.format(queryWithLabelTemplate, searchTerm, limit);
+		String query = String.format(QUERY_TEMPLATE_WITH_LABEL, searchTerm, limit);
 		
 		ResultSet rs = qef.createQueryExecution(query).execSelect();
 		
