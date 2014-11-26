@@ -7,6 +7,7 @@ RDFIndex can be used with a SPARQL endpoint, a Jena model or a SOLR/Lucene index
 Creating an index for a SPARQL endpoint is easiest to set up but is  time and memory consuming for large knowledge bases such as DBpedia and LinkedGeoData, where only indexing of the ontology (classes, properties) is feasible. If you want to create resource indexes over large knowlege bases, create a SOLR index and use the SOLRIndex class.
 
 **Usage Examples**
+
 ***Fuzzy Index on LinkedGeoData Classes***
 
     SPARQLModelIndex index = SPARQLModelIndex.createClassIndex
