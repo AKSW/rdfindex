@@ -1,7 +1,7 @@
 rdfindex
 ========
 
-Create and Acess RDF Indexes over literals including fuzzy matching and WordNet synonyms.
+Create and Acess RDF indexes over literals including fuzzy matching and WordNet synonyms.
 
 RDFIndex can be used with a SPARQL endpoint, a Jena model or a SOLR/Lucene index.
 Creating an index for a SPARQL endpoint is easiest to set up but is  time and memory consuming for large knowledge bases such as DBpedia and LinkedGeoData, where only indexing of the ontology (classes, properties) is feasible. If you want to create resource indexes over large knowlege bases, create a SOLR index and use the SOLRIndex class.
