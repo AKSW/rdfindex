@@ -12,36 +12,36 @@ import org.apache.solr.common.SolrDocumentList;
 
 public class SOLRIndex extends Index
 {
-	
+
 private HttpSolrServer server;
-	
+
 	private String primarySearchField;
 //	private String secondarySearchField;
-	
+
 	private String sortField;
-	
+
 	private boolean restrictiveSearch = true;
-	
+
 	public SOLRIndex(String solrServerURL){
 		server = new HttpSolrServer(solrServerURL);
 		server.setRequestWriter(new BinaryRequestWriter());
 	}
-	
+
 	public SOLRIndex(String solrServerURL, String primarySearchField){
 		server = new HttpSolrServer(solrServerURL);
 		server.setRequestWriter(new BinaryRequestWriter());
 		this.primarySearchField = primarySearchField;
 	}
-	
+
 //	public void setSearchFields(String primarySearchField, String secondarySearchField){
 //		this.primarySearchField = primarySearchField;
 ////		this.secondarySearchField = secondarySearchField;
 //	}
-	
+
 	public void setPrimarySearchField(String primarySearchField) {
 		this.primarySearchField = primarySearchField;
 	}
-	
+
 //	public void setSecondarySearchField(String secondarySearchField) {
 //		this.secondarySearchField = secondarySearchField;
 //	}
@@ -49,7 +49,7 @@ private HttpSolrServer server;
 	@Override
 	public IndexResultSet getResourcesWithScores(String queryString, int limit) {
 		IndexResultSet rs = new IndexResultSet();
-		
+
 		QueryResponse response;
 		try {
 			String solrString = queryString;
@@ -68,11 +68,11 @@ private HttpSolrServer server;
 						}
 						solrString += ")";
 					}
-					
+
 				} else {
 					solrString += queryString;
 				}
-			}			
+			}
 			SolrQuery query = new SolrQuery(solrString);
 		    query.setRows(limit);
 //		    query.setStart(offset);
@@ -81,7 +81,7 @@ private HttpSolrServer server;
 		    query.addField("score");
 			response = server.query(query);
 			SolrDocumentList docList = response.getResults();
-			
+
 			for(SolrDocument d : docList){
 				float score = 0;
 				if(d.get("score") instanceof ArrayList){
@@ -96,7 +96,7 @@ private HttpSolrServer server;
 		}
 		return rs;
 	}
-	
+
 	public void setSortField(String sortField){
 		this.sortField = sortField;
 	}

@@ -38,16 +38,16 @@ public class SPARQLModelIndex extends Index
 					//					+ "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>"
 					+ "SELECT ?s ?label { ?s text:query (rdfs:label ?l 10) ;     rdfs:label ?label}");
 
-	private static final float	FUZZY_MULTIPLIER	= 0.8f; 
+	private static final float	FUZZY_MULTIPLIER	= 0.8f;
 
 	//	protected String queryTemplate = "SELECT DISTINCT ?uri WHERE {\n" +
-	//			"?uri a ?type.\n" + 
+	//			"?uri a ?type.\n" +
 	//			"?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +
 	//			"FILTER(REGEX(STR(?label), '%s'))}\n" +
 	//			"LIMIT %d OFFSET %d";
 	//
 	//	protected String queryWithLabelTemplate = "SELECT DISTINCT ?uri ?label WHERE {\n" +
-	//			"?uri a ?type.\n" + 
+	//			"?uri a ?type.\n" +
 	//			"?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +
 	//			"FILTER(REGEX(STR(?label), '%s'))}\n" +
 	//			"LIMIT %d OFFSET %d";
@@ -55,7 +55,7 @@ public class SPARQLModelIndex extends Index
 	/** Create an index using your own model saving you the time needed to import the model when using an endpoint.
 	 * If you only have an endpoint or want to index a subset of the triples,
 	 * use the static methods {@link #createIndex(String, String, List)}, {@link #createClassIndex(String, String)} or {@link #createPropertyIndex(String, String)}.
-	 * All triples (uri,rdfs:label,label) will be put into the index.   
+	 * All triples (uri,rdfs:label,label) will be put into the index.
 	 * @param model the jena model containing the rdf:label statements that you want to index. Changes to the model after the construtor call are probably not indexed.
 	 * @param minSimilarity Between 0 (maximum fuzzyness) and 1f (no fuzzy matching).
 	 */
@@ -70,8 +70,8 @@ public class SPARQLModelIndex extends Index
 		// Join together into a dataset
 		dataset = TextDatasetFactory.createLucene(ds1, dir, entDef);
 		//		ds.setDefaultModel(model);
-		
-		
+
+
 		synchronized(model)
 		{
 			dataset.begin(ReadWrite.WRITE);
@@ -110,7 +110,7 @@ public class SPARQLModelIndex extends Index
 	@Override
 	public IndexResultSet getResourcesWithScores(String searchTerm, int limit)
 	{
-		IndexResultSet items = getResourceMap(searchTerm, limit,1f);		
+		IndexResultSet items = getResourceMap(searchTerm, limit,1f);
 		if(minSimilarity<1f&&items.size()<limit) {items.addAll(getResourceMap(searchTerm+'~', limit, FUZZY_MULTIPLIER));}
 		return items;
 	}
@@ -160,8 +160,8 @@ public class SPARQLModelIndex extends Index
 	}
 
 	public static SPARQLModelIndex createClassIndex(String endpoint, String defaultGraph,float minSimilarity)
-	{		
-		return createIndex(endpoint, defaultGraph, Lists.newArrayList(OWL.Class,RDFS.Class),minSimilarity);		
+	{
+		return createIndex(endpoint, defaultGraph, Lists.newArrayList(OWL.Class,RDFS.Class),minSimilarity);
 	}
 
 	public static SPARQLModelIndex createIndex(String endpoint, String defaultGraph,List<Resource> types,float minSimilarity)

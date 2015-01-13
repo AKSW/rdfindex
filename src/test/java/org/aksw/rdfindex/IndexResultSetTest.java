@@ -11,18 +11,19 @@ import org.aksw.rdfindex.IndexItem;
 import org.aksw.rdfindex.IndexResultSet;
 import org.junit.Test;
 
+/** Tests correctness of set operations. **/
 public class IndexResultSetTest
-{	
+{
 	private static final String	BERLIN_URI	= "http://dbpedia.org/resource/Berlin";
 	private static final String	DRESDEN_URI	= "http://dbpedia.org/resource/Dresden";
 	private static final String	LEIPZIG_URI	= "http://dbpedia.org/resource/Leipzig";
-	
+
 	IndexItem leipzig2 = new IndexItem(LEIPZIG_URI,"Leipzigig",0.9f);
-	IndexItem dresden2 = new IndexItem(DRESDEN_URI,"Dresdne",0.1f);	
+	IndexItem dresden2 = new IndexItem(DRESDEN_URI,"Dresdne",0.1f);
 	IndexItem berlin = new IndexItem(BERLIN_URI,"Berlin",0.5f);
-	
+
 	List<IndexItem> cities = Arrays.asList(new IndexItem[] {leipzig2,dresden2,berlin});
-	
+
 	private IndexResultSet testSet()
 	{
 		IndexResultSet test = new IndexResultSet();
@@ -112,7 +113,7 @@ public class IndexResultSetTest
 		test.remove((Object)leipzig2);
 		test.remove((Object)DRESDEN_URI);
 		assertFalse(test.contains(leipzig2));
-		assertFalse(test.contains(dresden2));		
+		assertFalse(test.contains(dresden2));
 	}
 
 	@Test public void testRemoveAllCollection()
@@ -143,14 +144,14 @@ public class IndexResultSetTest
 		assertFalse(leipzigDresden.contains(berlin));
 		assertFalse(leipzigDresden.contains(dresden2));
 	}
-	
+
 	@Test public void testIterator()
 	{
 		IndexResultSet test = testSet();
 		Iterator<IndexItem> it = test.iterator();
 		assertTrue(it.hasNext());
 	}
-	
+
 //	@Test public void testHashCode()
 //	{
 //		fail("Not yet implemented");

@@ -7,15 +7,15 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class IndexItem implements Comparable<IndexItem>
-{	
+{
 	private String uri;
 	private String label;
 	protected float score;
-	
+
 	@Override public int compareTo(IndexItem item)
 	{
 		if(uri.equals(item.uri)) return 0; // items are treated as unique by uri
-		
+
 		int i = -Float.compare(score, item.score);
 		if(i==0) {i=uri.compareTo(item.uri);}
 		return i;

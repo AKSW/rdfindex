@@ -17,13 +17,13 @@ package org.aksw.rdfindex;
 //	private Model model;
 //
 //	protected String queryTemplate = "SELECT DISTINCT ?uri WHERE {\n" +
-//			"?uri a ?type.\n" + 
+//			"?uri a ?type.\n" +
 //			"?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +
 //			"FILTER(REGEX(STR(?label), '%s'))}\n" +
 //			"LIMIT %d OFFSET %d";
 //
 //	protected String queryWithLabelTemplate = "SELECT DISTINCT ?uri ?label WHERE {\n" +
-//			"?uri a ?type.\n" + 
+//			"?uri a ?type.\n" +
 //			"?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label\n" +
 //			"FILTER(REGEX(STR(?label), '%s'))}\n" +
 //			"LIMIT %d OFFSET %d";
@@ -77,7 +77,7 @@ package org.aksw.rdfindex;
 //
 //	private ResultSet executeSelect(String query){
 //		ResultSet rs;
-//		rs = QueryExecutionFactory.create(QueryFactory.create(query, Syntax.syntaxARQ), model).execSelect();		
+//		rs = QueryExecutionFactory.create(QueryFactory.create(query, Syntax.syntaxARQ), model).execSelect();
 //		return rs;
 //	}
 //

@@ -17,7 +17,7 @@ import lombok.ToString;
 
 /** Set of IndexItems along with an index by URI.
  * Only one element for each uri can exist.
- * If another one with the same URI is added, the one with the highest score is kept.  
+ * If another one with the same URI is added, the one with the highest score is kept.
  * @author Konrad Höffner */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,14 +42,14 @@ public class IndexResultSet extends TreeSet<IndexItem>
 	public IndexItem get(String uri) {return uriToItem.get(uri);}
 	public IndexItem get(IndexItem item) {return uriToItem.get(item.getUri());}
 
-	/** Replaces an existing item with the same URI, if the new score is higher 
+	/** Replaces an existing item with the same URI, if the new score is higher
 	 * @see java.util.TreeSet#add(java.lang.Object)*/
 	@Override public boolean add(IndexItem item)
-	{		
+	{
 		IndexItem existing;
 		if((existing=get(item))==null||existing.getScore()<item.getScore())
 		{
-			if(existing!=null) {remove(existing);}			 
+			if(existing!=null) {remove(existing);}
 			uriToItem.put(item.getUri(),item);
 			return super.add(item);
 		}
@@ -76,7 +76,7 @@ public class IndexResultSet extends TreeSet<IndexItem>
 	}
 
 	@Override public boolean removeAll(Collection<?> c)
-	{	
+	{
 		int startSize = c.size();
 		for(Object o:c) {remove(o);}
 		return(startSize!=c.size());
@@ -120,9 +120,9 @@ public class IndexResultSet extends TreeSet<IndexItem>
 
 	public void retainBest(int n)
 	{
-		retainAll(new LinkedList<>(this).subList(0, Math.min(n, this.size())));		
+		retainAll(new LinkedList<>(this).subList(0, Math.min(n, this.size())));
 	}
-	
+
 	public void multiplyScore(float factor)
 	{
 		for(IndexItem item : this) {item.score=Math.max(0, Math.min(1,item.score*factor));}

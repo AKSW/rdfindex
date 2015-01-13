@@ -26,30 +26,30 @@ public class SPARQLModelIndexTest
 //		System.out.println(index.getResources("Restaurant"));
 		assertTrue(index.getResources("Restaurant").contains("http://linkedgeodata.org/ontology/Restaurant"));
 	}
-	
+
 	@Test public void extJwnlTest() throws JWNLException
 	{
 		Dictionary d = Dictionary.getDefaultResourceInstance();
-//		
+//
 		IndexWord iw = d.getIndexWord(POS.NOUN, "airport");
 		for(Synset sense: iw.getSenses())
 		{
 			System.out.println(sense);
-			for(Word word: sense.getWords()) System.out.println(word.getLemma());	
+			for(Word word: sense.getWords()) System.out.println(word.getLemma());
 		}
 //		System.out.println(d.getSynsetAt(POS.NOUN, "airport"));
 	}
-	
+
 	@Test public void testWordNetIndex()
-	{ 
-		SPARQLModelIndex index = SPARQLModelIndex.createClassIndex("http://linkedgeodata.org/sparql", "http://linkedgeodata.org",0);
-		WordNetIndex wIndex = new WordNetIndex(index);		
+	{
+		SPARQLModelIndex index = SPARQLModelIndex.createClassIndex("http://linkedgeodata.org/sparql", "http://linkedgeodata.org",1);
+		WordNetIndex wIndex = new WordNetIndex(index);
 		assertTrue(wIndex.getResources("cities").contains("http://linkedgeodata.org/ontology/City"));
 		assertTrue(wIndex.getResources("aerodromes").contains("http://linkedgeodata.org/ontology/Airport"));
 	}
-	
+
 	@Test public void testFuzzy()
-	{ 
+	{
 		SPARQLModelIndex index = SPARQLModelIndex.createClassIndex("http://linkedgeodata.org/sparql", "http://linkedgeodata.org",0.5f);
 		assertTrue(index.getResources("mirporg").get(0).equals("http://linkedgeodata.org/ontology/Airport"));
 	}

@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 /** A combination of two indexes. If the primary one returns less than {@code limit}, the secondary one is consulted as well.
- * Items of the secondary index incur a penalty.  
+ * Items of the secondary index incur a penalty.
  * @author Konrad Höffner */
 @AllArgsConstructor
 @ToString
 public class HierarchicalIndex extends Index
 {
 	private static final float	SECONDARY_PENALTY	= 0.8f;
-	
+
 	private Index primaryIndex;
 	private Index secondaryIndex;
-	
+
 	@Override
 	public IndexResultSet getResourcesWithScores(String queryString, int limit)
 	{

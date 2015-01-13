@@ -1,6 +1,6 @@
 package org.aksw.rdfindex;
 ///**
-// * 
+// *
 // */
 //package org.aksw.index;
 //
@@ -44,7 +44,7 @@ package org.aksw.rdfindex;
 //	@Test
 //	public void test() {
 //		WordnetAnalyzer analyzer = new WordnetAnalyzer("/home/me/tools/wordnet/prolog/wn_s.pl");
-//		
+//
 //		Dataset ds1 = DatasetFactory.createMem() ;
 //
 //		EntityDefinition entDef = new EntityDefinition("uri", "text", RDFS.label) ;
@@ -53,23 +53,23 @@ package org.aksw.rdfindex;
 //		Directory dir =  new RAMDirectory();
 //		// Join together into a dataset
 //		Dataset dataset = TextDatasetFactory.createLucene(ds1, dir, entDef);
-//		
-//		String query = "CONSTRUCT \n" + 
-//				"  { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type .\n" + 
-//				"    ?s ?p_label ?l .}\n" + 
-//				"WHERE\n" + 
-//				"  { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type\n" + 
-//				"    FILTER ( ?type IN (<http://www.w3.org/2002/07/owl#Class>, <http://www.w3.org/2000/01/rdf-schema#Class>) )\n" + 
-//				"    OPTIONAL\n" + 
-//				"      { ?s ?p_label ?l\n" + 
-//				"        FILTER ( ?p_label IN (<http://www.w3.org/2000/01/rdf-schema#label>) )\n" + 
-//				"        FILTER langMatches(lang(?l), \"en\")\n" + 
-//				"      }\n" + 
+//
+//		String query = "CONSTRUCT \n" +
+//				"  { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type .\n" +
+//				"    ?s ?p_label ?l .}\n" +
+//				"WHERE\n" +
+//				"  { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type\n" +
+//				"    FILTER ( ?type IN (<http://www.w3.org/2002/07/owl#Class>, <http://www.w3.org/2000/01/rdf-schema#Class>) )\n" +
+//				"    OPTIONAL\n" +
+//				"      { ?s ?p_label ?l\n" +
+//				"        FILTER ( ?p_label IN (<http://www.w3.org/2000/01/rdf-schema#label>) )\n" +
+//				"        FILTER langMatches(lang(?l), \"en\")\n" +
+//				"      }\n" +
 //				"  }";
-//		
+//
 //		QueryExecutionFactory qef = new QueryExecutionFactoryHttp("http://linkedgeodata.org/sparql", "http://linkedgeodata.org");
 //		Model model = qef.createQueryExecution(query).execConstruct();
-//		
+//
 //		dataset.begin(ReadWrite.WRITE);
 //		try {
 //			dataset.getDefaultModel().add(model);
@@ -77,17 +77,17 @@ package org.aksw.rdfindex;
 //		} finally {
 //			dataset.end();
 //		}
-//		
+//
 //		ParameterizedSparqlString queryTemplate = new ParameterizedSparqlString(
 //				"PREFIX text: <http://jena.apache.org/text#>"
 //						+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
 //						+ "SELECT ?s ?label { ?s text:query (rdfs:label ?l 10) ;     rdfs:label ?label}");
 //		queryTemplate.setLiteral("l", "aerodrome");
-//		
+//
 //		ResultSet rs = com.hp.hpl.jena.query.QueryExecutionFactory.create(queryTemplate.asQuery(), dataset).execSelect();
 //		System.out.println(ResultSetFormatter.asText(rs));
-//		
-//		
+//
+//
 //		try {
 //			IndexReader iReader = DirectoryReader.open(dir);
 //			TermsEnum iterator = iReader.leaves().get(0).reader().terms("text").iterator(null);

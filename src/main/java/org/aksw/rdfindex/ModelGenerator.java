@@ -23,42 +23,42 @@ package org.aksw.rdfindex;
 //import com.jamonapi.MonitorFactory;
 //
 //public class ModelGenerator {
-//	
+//
 //	private static final Logger logger = Logger.getLogger(ModelGenerator.class);
 //	private Monitor queryMonitor = MonitorFactory.getTimeMonitor("SPARQL Query monitor");
-//	
+//
 //	private SparqlEndpoint endpoint;
 //	private int recursionDepth = 1;
-//	
+//
 //	private static final int CHUNK_SIZE = 1000;
-//	
+//
 //	private ExtractionDBCache cache;
-//	
+//
 //	private Set<String> predicateFilters;
-//	
+//
 //	public enum Strategy{
 //		INCREMENTALLY,
 //		CHUNKS
 //	}
-//	
+//
 //	public ModelGenerator(SparqlEndpoint endpoint){
 //		this(endpoint, Collections.<String>emptySet(), null);
 //	}
-//	
+//
 //	public ModelGenerator(SparqlEndpoint endpoint, Set<String> predicateFilters){
 //		this(endpoint, predicateFilters, null);
 //	}
-//	
+//
 //	public ModelGenerator(SparqlEndpoint endpoint, Set<String> predicateFilters, ExtractionDBCache cache){
 //		this.endpoint = endpoint;
 //		this.predicateFilters = predicateFilters;
 //		this.cache = cache;
 //	}
-//	
+//
 //	public ModelGenerator(SparqlEndpoint endpoint, ExtractionDBCache cache){
 //		this(endpoint, Collections.<String>emptySet(), cache);
 //	}
-//	
+//
 //	public ModelGenerator(String endpointURL){
 //		try {
 //			this.endpoint = new SparqlEndpoint(new URL(endpointURL));
@@ -66,7 +66,7 @@ package org.aksw.rdfindex;
 //			e.printStackTrace();
 //		}
 //	}
-//	
+//
 //	public Model createModel(String resource, Strategy strategy, int recursionDepth){
 //		this.recursionDepth = recursionDepth;
 //		if(strategy == Strategy.INCREMENTALLY){
@@ -76,12 +76,12 @@ package org.aksw.rdfindex;
 //		}
 //		return ModelFactory.createDefaultModel();
 //	}
-//	
+//
 //	public void setRecursionDepth(int recursionDepth){
 //		this.recursionDepth = recursionDepth;
 //	}
-//	
-//	
+//
+//
 //	/**
 //	 * A SPARQL CONSTRUCT query is created, to get a RDF graph for the given example with a specific recursion depth.
 //	 * @param example The example resource for which a CONSTRUCT query is created.
@@ -104,15 +104,15 @@ package org.aksw.rdfindex;
 //		for(int i = 1; i < recursionDepth; i++){
 //			sb.append("}");
 //		}
-//		
-//		
+//
+//
 //		for(int i = 0; i < recursionDepth; i++){
 //			for(String predicate : predicateFilter){
 //				sb.append("FILTER (!REGEX (?p").append(i).append(", \"").append(predicate).append("\"))");
 //			}
-//			
+//
 //		}
-//	
+//
 //		sb.append("}\n");
 ////		sb.append("ORDER BY ");
 ////		for(int i = 0; i < recursionDepth; i++){
@@ -121,39 +121,39 @@ package org.aksw.rdfindex;
 ////		sb.append("\n");
 //		sb.append("LIMIT ").append(limit).append("\n");
 //		sb.append("OFFSET ").append(offset);
-//		
+//
 //		Query query = QueryFactory.create(sb.toString());
-//		
+//
 //		return sb.toString();
 //	}
-//	
-//	
+//
+//
 //	/**
 //	 * A SPARQL CONSTRUCT query is created, to get a RDF graph for the given example.
 //	 * @param example The example resource for which a CONSTRUCT query is created.
 //	 * @return The JENA ARQ Query object.
 //	 */
 //	private String makeConstructQuery(String example, Set<String> predicateFilters){
-//		
+//
 //		StringBuilder sb = new StringBuilder();
 //		sb.append("CONSTRUCT {\n");
 //		sb.append("<").append(example).append("> ").append("?p ").append("?o").append(".\n");
 //		sb.append("}\n");
 //		sb.append("WHERE {\n");
 //		sb.append("<").append(example).append("> ").append("?p ").append("?o").append(".\n");
-//		
+//
 //		for(String predicate : predicateFilters){
 //			sb.append("FILTER (!REGEX (?p, \"").append(predicate).append("\"))");
 //		}
-//		
+//
 //		sb.append("}\n");
 //		Query query = QueryFactory.create(sb.toString());
-//		
+//
 //		return sb.toString();
 //	}
-//	
-//	
-//	
+//
+//
+//
 //	private Model getModelChunked(String resource){
 ////		logger.debug("Resource: " + resource);
 //		String query = makeConstructQueryOptional(resource, CHUNK_SIZE, 0, predicateFilters);
@@ -194,7 +194,7 @@ package org.aksw.rdfindex;
 //		}
 //		return all;
 //	}
-//	
+//
 //	private Model getModelIncrementallyRec(String resource, int depth){
 //		logger.debug("Resource: " + resource);
 //		String query = makeConstructQuery(resource, predicateFilters);
@@ -229,10 +229,10 @@ package org.aksw.rdfindex;
 //			}
 //			model.add(tmp);
 //		}
-//		
+//
 //		return model;
 //	}
-//	
+//
 //	private Model getModel(String query){
 //		QueryEngineHTTP queryExecution = new QueryEngineHTTP(endpoint.getURL().toString(), query);
 //		for (String dgu : endpoint.getDefaultGraphURIs()) {
@@ -240,10 +240,10 @@ package org.aksw.rdfindex;
 //		}
 //		for (String ngu : endpoint.getNamedGraphURIs()) {
 //			queryExecution.addNamedGraph(ngu);
-//		}			
+//		}
 //		Model model = queryExecution.execConstruct();
 //		return model;
 //	}
-//	
+//
 //
 //}
