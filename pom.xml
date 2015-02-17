@@ -5,18 +5,20 @@
 	<artifactId>rdfindex</artifactId>
 	<version>0.1-SNAPSHOT</version>
 
- <properties><lucene.version>4.10.3</lucene.version></properties>
+	<properties>
+		<lucene.version>4.10.3</lucene.version>
+	</properties>
 
 	<repositories>
 		<repository>
 			<id>maven.aksw.internal</id>
 			<name>University Leipzig, AKSW Maven2 Repository</name>
-			<url>http://maven.aksw.org/archiva/repository/internal</url>
+			<url>http://maven.aksw.org/repository/internal</url>
 		</repository>
 		<repository>
 			<id>maven.aksw.snapshots</id>
 			<name>University Leipzig, AKSW Maven2 Repository</name>
-			<url>http://maven.aksw.org/archiva/repository/snapshots</url>
+			<url>http://maven.aksw.org/repository/snapshots</url>
 		</repository>
 		<!-- temporary. goal is to push everything needed here to aksw maven repo -->
 		<repository>
@@ -30,16 +32,31 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	<dependencyManagement>
+		<dependencies>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-iri</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.10</version>
+		</dependency>
 		<dependency>
 			<groupId>org.aksw.jena-sparql-api</groupId>
 			<artifactId>jena-sparql-api-core</artifactId>
-			<version>2.11.2-57-SNAPSHOT</version>
+			<version>2.11.2-59</version>
 		</dependency>
 		<dependency>
 			<groupId>org.aksw.jena-sparql-api</groupId>
 			<artifactId>jena-sparql-api-cache-h2</artifactId>
-			<version>2.11.2-57-SNAPSHOT</version>
+			<version>2.11.2-56</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.extjwnl</groupId>
