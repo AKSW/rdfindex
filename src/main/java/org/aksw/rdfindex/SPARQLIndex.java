@@ -29,8 +29,7 @@ public class SPARQLIndex extends Index
 	@Override
 	public IndexResultSet getResourcesWithScores(String searchTerm, int limit) {
 		IndexResultSet irs = new IndexResultSet();
-
-		String query = String.format(QUERY_TEMPLATE_WITH_LABEL, searchTerm, limit);
+		String query = String.format(getQueryTemplateWithLabel(), searchTerm, limit);
 
 		ResultSet rs = qef.createQueryExecution(query).execSelect();
 
